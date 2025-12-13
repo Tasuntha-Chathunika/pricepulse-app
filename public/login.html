@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - PricePulse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>body { font-family: 'Poppins', sans-serif; }</style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div class="absolute top-10 left-10 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+        <div class="absolute bottom-10 right-10 w-72 h-72 bg-red-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+    </div>
+
+    <div class="w-full max-w-md bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/50 overflow-hidden relative">
+        
+        <div class="pt-10 pb-6 text-center">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-orange-100 to-red-50 mb-4 shadow-inner text-orange-600 text-2xl">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-800">Welcome Back</h1>
+            <p class="text-gray-500 text-sm mt-2">Login to continue tracking your prices</p>
+        </div>
+
+        <div class="px-8 pb-8">
+            <form onsubmit="handleLogin(event)" class="space-y-5">
+                
+                <div>
+                    <label class="block text-gray-700 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Email Address</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fa-regular fa-envelope text-gray-400"></i>
+                        </div>
+                        <input type="email" required class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white transition text-sm font-medium" placeholder="you@example.com">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-lock text-gray-400"></i>
+                        </div>
+                        <input type="password" required class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white transition text-sm font-medium" placeholder="••••••••">
+                    </div>
+                    <div class="text-right mt-2">
+                        <a href="#" class="text-xs font-medium text-gray-400 hover:text-red-500 transition">Forgot Password?</a>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-yellow-500 via-orange-500 to-red-600 hover:from-yellow-600 hover:to-red-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 transition transform hover:-translate-y-0.5 text-sm uppercase tracking-wide">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="mt-8 text-center">
+                <p class="text-sm text-gray-600">Don't have an account? <a href="signup.html" class="text-orange-600 font-bold hover:text-red-600 transition">Sign Up Free</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            
+            // Add Loading Effect
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                window.location.href = 'dashboard.html'; 
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

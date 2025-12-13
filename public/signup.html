@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - PricePulse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>body { font-family: 'Poppins', sans-serif; }</style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-red-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+    </div>
+
+    <div class="w-full max-w-md bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/50 overflow-hidden relative">
+        
+        <div class="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 p-8 text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full bg-white opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E');"></div>
+            <h2 class="text-3xl font-bold text-white relative z-10">Join PricePulse</h2>
+            <p class="text-white/90 text-sm mt-1 relative z-10">Start saving money on everything you buy</p>
+        </div>
+
+        <form class="p-8 space-y-4" onsubmit="handleRegister(event)">
+            
+            <div>
+                <label class="block text-gray-700 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Full Name</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fa-regular fa-user text-gray-400"></i>
+                    </div>
+                    <input type="text" required class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white transition text-sm font-medium" placeholder="S.D. Tasuntha">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-gray-700 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Email Address</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fa-regular fa-envelope text-gray-400"></i>
+                    </div>
+                    <input type="email" required class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white transition text-sm font-medium" placeholder="you@example.com">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-gray-700 text-xs font-bold uppercase tracking-wider mb-2 ml-1">Create Password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-lock text-gray-400"></i>
+                    </div>
+                    <input type="password" required class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:bg-white transition text-sm font-medium" placeholder="••••••••">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full mt-2 bg-gray-900 hover:bg-gray-800 text-white font-bold py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-sm uppercase flex items-center justify-center gap-2 group">
+                Create Account <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+            </button>
+        </form>
+
+        <div class="bg-gray-50 px-8 py-4 border-t border-gray-100 text-center">
+            <p class="text-sm text-gray-600">Already have an account? <a href="login.html" class="text-red-600 font-bold hover:underline">Sign In</a></p>
+        </div>
+    </div>
+
+    <script>
+        function handleRegister(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Creating...';
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+            
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
