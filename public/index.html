@@ -1,62 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PricePulse - Welcome</title>
+    <title>PricePulse - Smart Price Tracker</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style> body { font-family: 'Poppins', sans-serif; } </style>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+            animation: blob 10s infinite;
+        }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+    </style>
 </head>
-<body class="bg-white text-gray-800">
+<body class="bg-white text-gray-800 overflow-x-hidden">
 
-    <nav class="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 shadow-lg py-4">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2 cursor-pointer group">
-                <div class="flex text-white text-3xl group-hover:scale-110 transition duration-300">
+    <nav class="bg-white/90 backdrop-blur-md border-b border-gray-100 fixed w-full z-50 top-0 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-2.5 cursor-pointer group" onclick="window.location.href='index.html'">
+                <div class="bg-gradient-to-br from-yellow-400 to-red-600 text-white w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition duration-300">
                     <i class="fa-solid fa-chart-line"></i>
                 </div>
-                <span class="text-2xl font-bold tracking-tight text-white drop-shadow-md">PricePulse</span>
+                <span class="text-2xl font-bold tracking-tight text-gray-900">PricePulse</span>
             </div>
             
-            <div class="flex-1 w-full md:mx-10 relative">
-                <input type="text" placeholder="Find Daraz or Wasi.lk Products..." class="w-full bg-white border-none text-gray-700 py-3 px-5 rounded-full focus:outline-none focus:ring-4 focus:ring-yellow-300 shadow-sm">
-                <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-red-500 hover:text-red-700 p-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600">
+                <a href="#how-it-works" class="hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition">How it works</a>
+                <a href="popular.html" class="hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition">Popular Drops</a>
             </div>
 
-            <div class="flex items-center gap-4">
-                <a href="signup.html" class="bg-black text-white px-6 py-2.5 rounded-full hover:bg-gray-800 transition shadow-lg text-sm font-semibold">Sign Up</a>
-                <a href="login.html" class="text-white hover:text-gray-100 font-bold text-sm">Sign In</a>
+            <div class="hidden md:flex items-center gap-4">
+                <a href="login.html" class="text-gray-600 hover:text-red-600 font-bold text-sm px-2 transition">Log In</a>
+                <a href="signup.html" class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-6 py-2.5 rounded-full hover:shadow-lg hover:shadow-orange-200 hover:-translate-y-0.5 transition-all duration-300 text-sm font-bold">Get Started</a>
             </div>
+
+            <button onclick="toggleMobileMenu()" class="md:hidden text-gray-700 text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full px-4 py-4 shadow-lg flex-col gap-4 text-center">
+            <a href="#how-it-works" class="block text-gray-600 font-medium py-2">How it works</a>
+            <a href="popular.html" class="block text-gray-600 font-medium py-2">Popular Drops</a>
+            <hr class="border-gray-100">
+            <a href="login.html" class="block text-gray-600 font-bold py-2">Log In</a>
+            <a href="signup.html" class="block bg-gradient-to-r from-orange-500 to-red-600 text-white py-3 rounded-lg font-bold shadow-md">Get Started Free</a>
         </div>
     </nav>
 
-    <div class="bg-gray-50 py-12 border-b">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Track Prices. Save Money.</h1>
-            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Stop overpaying! Track price drops on Daraz, Wasi.lk and more. Join PricePulse to create your personal watchlist.</p>
-            <a href="signup.html" class="bg-red-600 text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 transition shadow-md">Start Tracking for Free</a>
+    <div class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
+            <div class="absolute top-10 right-0 w-[600px] h-[600px] bg-yellow-100 opacity-40 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+            <div class="absolute top-20 right-80 w-[500px] h-[500px] bg-red-100 opacity-40 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-32 left-20 w-[600px] h-[600px] bg-orange-100 opacity-40 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
+                
+                <div class="lg:w-1/2 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-orange-600 text-xs font-bold uppercase tracking-wide mb-8 shadow-sm hover:shadow-md transition cursor-default">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+                        </span>
+                        #1 Price Tracker in Sri Lanka
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-6">
+                        Don't Buy Until <br>
+                        The Price <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-orange-500 to-red-600">Drops.</span>
+                    </h1>
+                    
+                    <p class="text-lg text-slate-600 mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                        Stop overpaying on <b>Daraz</b> and <b>Wasi.lk</b>. We track product prices 24/7 and send you an instant alert when it's cheapest to buy.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                        <a href="signup.html" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 hover:from-yellow-500 hover:via-orange-600 hover:to-red-700 text-white font-bold rounded-xl shadow-xl shadow-orange-200 hover:shadow-2xl hover:-translate-y-1 transition transform flex items-center justify-center gap-2">
+                            Start Tracking Free <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="dashboard.html" class="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 font-bold rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-laptop"></i> Live Demo
+                        </a>
+                    </div>
+                    
+                    <div class="mt-8 flex items-center justify-center lg:justify-start gap-6 text-sm text-slate-400 font-medium">
+                        <span class="flex items-center gap-1"><i class="fa-solid fa-check-circle text-emerald-500"></i> No credit card</span>
+                        <span class="flex items-center gap-1"><i class="fa-solid fa-check-circle text-emerald-500"></i> Always Free</span>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 relative perspective-1000">
+                    <div class="absolute -top-12 -right-4 lg:-right-12 bg-white p-4 rounded-2xl shadow-xl shadow-red-100 z-30 animate-bounce border border-red-50" style="animation-duration: 3s;">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-red-100 p-2.5 rounded-full text-red-600"><i class="fa-solid fa-bell"></i></div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase">Alert</p>
+                                <p class="text-sm font-bold text-slate-800">iPhone 13 dropped by Rs. 5,000!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative bg-white/60 backdrop-blur-xl border border-white/60 rounded-[2rem] p-6 shadow-2xl transform rotate-y-12 hover:rotate-0 transition duration-500">
+                        <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-100 flex items-center gap-3 mb-6">
+                            <div class="flex gap-1.5">
+                                <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                            </div>
+                            <div class="bg-slate-50 px-3 py-1 rounded-md text-xs text-slate-400 flex-1 text-center font-mono">wasi.lk/product/iphone-13</div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex gap-5 items-center">
+                            <div class="w-28 h-28 bg-slate-50 rounded-xl flex items-center justify-center relative overflow-hidden">
+                                <i class="fa-brands fa-apple text-5xl text-slate-300"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="h-4 w-3/4 bg-slate-100 rounded mb-2"></div>
+                                <div class="h-3 w-1/2 bg-slate-50 rounded mb-5"></div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="text-xs text-slate-400 line-through">Rs. 240,000</span>
+                                        <span class="text-xl font-bold text-slate-900">Rs. 207,900</span>
+                                    </div>
+                                    <div class="px-3 py-1 bg-red-50 rounded-lg text-red-500 text-xs font-bold border border-red-100 animate-pulse">-15% OFF</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="container mx-auto px-4 py-8">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">Popular Products Today</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-lg transition bg-white relative group">
-                <span class="absolute top-3 left-3 bg-green-500 text-white text-[10px] uppercase font-bold px-2 py-1 rounded">Best Price</span>
-                <div class="h-40 flex items-center justify-center mb-4 group-hover:scale-105 transition"><i class="fa-brands fa-amazon text-6xl text-gray-300"></i></div>
-                <h3 class="text-sm font-semibold text-gray-800 mb-2">Amazon eGift Card</h3>
-                <div class="font-bold text-lg text-gray-900">$50.00</div>
+    <div id="features" class="py-24 bg-slate-50 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 max-w-2xl mx-auto">
+                <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Everything you need to save money</h2>
+                <p class="text-slate-500 text-lg">Smart tools built for smart shoppers. We do the hard work.</p>
             </div>
-            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-lg transition bg-white relative group">
-                <span class="absolute top-3 left-3 bg-green-500 text-white text-[10px] uppercase font-bold px-2 py-1 rounded">Best Price</span>
-                <div class="h-40 flex items-center justify-center mb-4 group-hover:scale-105 transition"><i class="fa-solid fa-mobile-screen text-6xl text-gray-300"></i></div>
-                <h3 class="text-sm font-semibold text-gray-800 mb-2">Samsung Galaxy S24 Ultra</h3>
-                <div class="font-bold text-lg text-gray-900">Rs. 320,000</div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-[2rem] shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition duration-300">
+                    <div class="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center text-red-500 text-2xl mb-6">
+                        <i class="fa-regular fa-bell"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Instant Alerts</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Don't check everyday. We send you a notification the moment a price drops below your target.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-[2rem] shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition duration-300">
+                    <div class="w-16 h-16 bg-yellow-50 rounded-2xl flex items-center justify-center text-yellow-500 text-2xl mb-6">
+                        <i class="fa-solid fa-chart-area"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Price History</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Is it a real deal? View 6-month price history charts to spot fake discounts before you buy.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-[2rem] shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition duration-300">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500 text-2xl mb-6">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Unlimited Watchlist</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        Organize your shopping list. Track electronics, fashion, and home items easily in one place.
+                    </p>
+                </div>
             </div>
-            </div>
+        </div>
     </div>
 
+    <div class="py-24 px-4 bg-white">
+        <div class="container mx-auto bg-slate-900 rounded-[2.5rem] p-12 md:p-16 text-center shadow-2xl relative overflow-hidden">
+            
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 relative z-10">Ready to stop overpaying?</h2>
+            <p class="text-slate-300 text-lg mb-10 max-w-xl mx-auto relative z-10">Join thousands of Sri Lankans using PricePulse to find the best deals every day.</p>
+            
+            <a href="signup.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold py-4 px-10 rounded-full shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105 transition text-lg relative z-10">
+                Create Free Account <i class="fa-solid fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+    </div>
+
+   <footer class="bg-gray-900 text-gray-300 pt-16 pb-8 mt-auto">
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+            <div class="flex items-center gap-2 text-white text-2xl font-bold mb-4 cursor-pointer" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-chart-line text-orange-500"></i>
+                <span>PricePulse</span>
+            </div>
+            <p class="text-sm leading-relaxed opacity-80">
+                Track prices, set alerts, and save money on your favorite products from Sri Lanka's top online stores.
+            </p>
+        </div>
+
+        <div>
+            <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Quick Links</h4>
+            <ul class="space-y-3 text-sm font-medium">
+                <li><a href="index.html" class="hover:text-orange-500 transition-colors duration-300">Home</a></li>
+                <li><a href="dashboard.html" class="hover:text-orange-500 transition-colors duration-300">Dashboard</a></li>
+                <li><a href="popular.html" class="hover:text-orange-500 transition-colors duration-300">Popular Products</a></li>
+                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">About Us</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Support & Legal</h4>
+            <ul class="space-y-3 text-sm font-medium">
+                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Help Center</a></li>
+                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Privacy Policy</a></li>
+                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Terms of Service</a></li>
+                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div>
+             <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Stay Connected</h4>
+             <p class="text-sm mb-4 opacity-80">Subscribe to get the latest deal alerts.</p>
+             <div class="flex gap-2 mb-6">
+                <input type="email" placeholder="Enter your email" class="bg-gray-800 text-sm p-3 rounded-l-lg focus:outline-none w-full border border-gray-700 focus:border-orange-500 transition">
+                <button class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 rounded-r-lg hover:opacity-90 transition">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+             </div>
+             <div class="flex gap-4 text-xl">
+                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-facebook"></i></a>
+                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-twitter"></i></a>
+                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-instagram"></i></a>
+                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-linkedin"></i></a>
+             </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 border-t border-gray-800 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center text-sm opacity-60">
+            <p>© 2025 PricePulse. All rights reserved.</p>
+            <p class="mt-2 md:mt-0">Designed & Developed by <span class="text-orange-400">S.D. Tasuntha</span></p>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

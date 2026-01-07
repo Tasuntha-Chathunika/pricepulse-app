@@ -2,101 +2,309 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Popular Products - PricePulse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Drops - PricePulse</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Poppins', sans-serif; }</style>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        /* Background Gradient Animation (Optional - makes it look richer) */
+        .bg-gradient-animate {
+            background: linear-gradient(45deg, #f3e7e9, #e3eeff, #f3e7e9);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
 </head>
-<body class="bg-white text-gray-800">
+<body class="bg-gradient-animate font-sans">
 
-    <nav class="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 shadow-lg py-4 sticky top-0 z-50">
+    <nav class="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 shadow-lg py-3 sticky top-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
-                <div class="flex text-white text-3xl"><i class="fa-solid fa-chart-line"></i></div>
+            
+            <div class="flex items-center gap-2.5 cursor-pointer group" onclick="window.location.href='index.html'">
+                <div class="bg-white/20 backdrop-blur-sm text-white w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-inner border border-white/20 group-hover:bg-white group-hover:text-orange-600 transition duration-300">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
                 <span class="text-2xl font-bold tracking-tight text-white drop-shadow-md">PricePulse</span>
             </div>
-            <div class="flex-1 w-full md:mx-10 relative">
-                <input type="text" placeholder="Search products..." class="w-full bg-white/95 border-none text-gray-700 py-3 px-5 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-300 shadow-sm">
-                <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-red-600 p-2"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-            <div class="flex items-center gap-6 text-sm font-medium">
-                
-                <a href="popular.html" class="text-white font-bold border-b-2 border-white pb-1">Popular Products</a>
-                
-                <a href="drops.html" class="text-white hover:text-yellow-100 transition border-b-2 border-transparent pb-1">Top Price Drops</a>
 
-                <div class="flex items-center gap-3 border-l pl-4 border-white/30">
-                     <a href="dashboard.html" class="text-white hover:text-yellow-200 font-bold border border-white/40 px-3 py-1 rounded-full">Dashboard</a>
+            <div class="flex-1 w-full md:mx-10 relative max-w-xl">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400 group-focus-within:text-orange-500 transition"></i>
+                    </div>
+                    <input type="text" placeholder="Search Wasi.lk products..." class="w-full bg-white border-none text-slate-700 py-2.5 pl-10 pr-4 rounded-xl focus:outline-none focus:ring-4 focus:ring-white/30 shadow-lg text-sm font-medium">
                 </div>
+            </div>
+
+            <div class="flex items-center gap-6 text-sm font-bold text-white">
+                <a href="popular.html" class="bg-white text-orange-600 px-4 py-2 rounded-lg shadow-md hover:bg-gray-50 transition">Popular Drops</a>
+                <a href="dashboard.html" class="hover:text-yellow-100 transition flex items-center gap-2 opacity-90 hover:opacity-100">
+                    <i class="fa-solid fa-table-columns"></i> Dashboard
+                </a>
             </div>
         </div>
     </nav>
 
-    <div class="container mx-auto px-4 mt-10 mb-6">
-        <div class="flex flex-wrap items-center justify-between gap-4">
-            <div>
-                <div class="flex items-center gap-3">
-                    <h1 class="text-3xl font-extrabold text-gray-900">Popular Products</h1>
-                    <button class="border border-gray-300 px-3 py-1 rounded-full text-xs font-semibold hover:bg-gray-50 flex items-center gap-2 text-gray-600">
-                        <i class="fa-solid fa-rss text-orange-500"></i> RSS
-                    </button>
+    <div class="bg-white/80 backdrop-blur-md border-b border-white/50 py-10 shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <h1 class="text-3xl font-extrabold text-slate-900">Trending on Wasi.lk</h1>
+                        <span class="bg-red-50 text-red-600 text-xs font-bold px-2 py-1 rounded-md border border-red-100 flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> LIVE
+                        </span>
+                    </div>
+                    <p class="text-slate-500 text-sm max-w-2xl">Discover the biggest price drops on electronics, smartphones, and accessories from Sri Lanka's leading online store.</p>
                 </div>
-                <p class="text-gray-500 text-sm mt-2">Here is what's popular with the PricePulse community lately.</p>
+                
+                <div class="flex gap-2">
+                    <button class="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-0.5 transition-all duration-300">All Items</button>
+                    <button class="px-5 py-2.5 bg-white text-slate-700 border border-slate-200 rounded-xl text-sm font-bold hover:bg-slate-50 hover:border-slate-300 transition shadow-sm">Phones</button>
+                    <button class="px-5 py-2.5 bg-white text-slate-700 border border-slate-200 rounded-xl text-sm font-bold hover:bg-slate-50 hover:border-slate-300 transition shadow-sm">Audio</button>
+                </div>
             </div>
-            
-            <div class="bg-gray-100 rounded-lg p-1 flex">
-                <select class="bg-transparent text-gray-700 text-sm font-medium px-4 py-2 outline-none cursor-pointer">
-                    <option>All Categories</option>
-                    <option>Electronics</option>
-                    <option>Home & Kitchen</option>
-                </select>
-            </div>
-        </div>
-        
-        <div class="flex gap-2 mt-6">
-            <button class="bg-gray-100 text-gray-800 px-5 py-2 rounded font-bold hover:bg-gray-200 transition">All Products</button>
-            <button class="bg-black text-white px-5 py-2 rounded font-bold hover:bg-gray-800 transition shadow-lg">Deals Only</button>
         </div>
     </div>
 
-    <div class="container mx-auto px-4 pb-20">
+    <div class="container mx-auto px-4 py-12">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
 
-            <div class="border border-gray-200 rounded-xl p-5 hover:shadow-xl transition bg-white relative flex flex-col h-full">
-                <span class="absolute top-4 left-4 bg-[#84cc16] text-white text-[11px] uppercase font-bold px-2 py-0.5 rounded shadow-sm">Best Price</span>
-                <div class="h-40 flex items-center justify-center mb-4 mt-6"><i class="fa-brands fa-amazon text-6xl text-orange-400"></i></div>
-                <h3 class="text-sm text-gray-600 leading-snug mb-2 text-center h-10 overflow-hidden">Amazon eGift Card</h3>
-                <div class="text-center mt-auto">
-                    <div class="font-extrabold text-xl text-gray-900">$50.00</div>
-                    <div class="text-gray-400 text-xs mb-4">Avg: $50.00</div>
-                    <button class="bg-[#facc15] hover:bg-yellow-400 text-black font-bold text-sm w-full py-2.5 rounded-full transition shadow-sm">View at Amazon</button>
+            <div class="group bg-white rounded-2xl p-4 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-2xl hover:shadow-orange-500/20 hover:border-orange-200 hover:-translate-y-2 transition-all duration-500 relative flex flex-col h-full">
+                <div class="absolute top-3 left-3 flex flex-col gap-1 z-10">
+                    <span class="bg-red-50 text-red-600 text-[10px] uppercase font-bold px-2 py-1 rounded border border-red-100">-8% OFF</span>
+                </div>
+                <div class="absolute top-3 right-3 z-10">
+                    <button class="text-slate-300 hover:text-red-500 transition"><i class="fa-regular fa-heart"></i></button>
+                </div>
+                
+                <div class="h-48 flex items-center justify-center mb-4 relative overflow-hidden rounded-xl bg-slate-50 group-hover:bg-blue-50/30 transition">
+                    <img src="https://www.wasi.lk/wp-content/uploads/2023/09/apple-iphone-15-pro-max-blue-titanium.jpg" alt="iPhone 15 Pro Max" class="h-40 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
+                </div>
+
+                <div class="mb-2">
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Apple</div>
+                    <h3 class="font-bold text-slate-800 leading-tight mb-2 line-clamp-2 h-10 group-hover:text-orange-600 transition">iPhone 15 Pro Max (256GB) - Blue Titanium</h3>
+                    <div class="flex items-center gap-2 mb-3">
+                         <span class="bg-green-50 text-green-700 text-[10px] font-bold px-1.5 py-0.5 rounded border border-green-100">In Stock</span>
+                         <span class="text-[10px] text-slate-400 font-medium">Genxt Warranty</span>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-3 border-t border-slate-50">
+                    <div class="flex items-end gap-2 mb-1">
+                        <span class="text-lg font-extrabold text-slate-900">Rs. 415,000</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs mb-4">
+                        <span class="text-slate-400 line-through">Rs. 450,000</span>
+                        <span class="text-red-500 font-bold">Save Rs. 35k</span>
+                    </div>
+                    <a href="https://wasi.lk/shop/apple-iphone-15-pro-max-256gb/" target="_blank" class="block w-full text-center bg-gradient-to-r from-slate-800 to-slate-900 text-white font-bold text-sm py-3 rounded-xl hover:from-orange-600 hover:to-red-600 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300">
+                        View Details
+                    </a>
                 </div>
             </div>
 
-            <div class="border border-gray-200 rounded-xl p-5 hover:shadow-xl transition bg-white relative flex flex-col h-full">
-                <span class="absolute top-4 left-4 bg-[#84cc16] text-white text-[11px] uppercase font-bold px-2 py-0.5 rounded shadow-sm">Best Price</span>
-                <div class="h-40 flex items-center justify-center mb-4 mt-6"><i class="fa-solid fa-blender text-6xl text-gray-300"></i></div>
-                <h3 class="text-sm text-gray-600 leading-snug mb-2 text-center h-10 overflow-hidden">Breville Smart Oven Air Fryer Pro</h3>
-                <div class="text-center mt-auto">
-                    <div class="font-extrabold text-xl text-gray-900">$299.95</div>
-                    <div class="text-gray-400 text-xs mb-4">Avg: $365.67</div>
-                    <button class="bg-[#facc15] hover:bg-yellow-400 text-black font-bold text-sm w-full py-2.5 rounded-full transition shadow-sm">View at Amazon</button>
+            <div class="group bg-white rounded-2xl p-4 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-2xl hover:shadow-orange-500/20 hover:border-orange-200 hover:-translate-y-2 transition-all duration-500 relative flex flex-col h-full">
+                <div class="absolute top-3 left-3 flex flex-col gap-1 z-10">
+                    <span class="bg-orange-50 text-orange-600 text-[10px] uppercase font-bold px-2 py-1 rounded border border-orange-100">Best Seller</span>
+                </div>
+                 <div class="absolute top-3 right-3 z-10">
+                    <button class="text-slate-300 hover:text-red-500 transition"><i class="fa-regular fa-heart"></i></button>
+                </div>
+
+                <div class="h-48 flex items-center justify-center mb-4 relative overflow-hidden rounded-xl bg-slate-50 group-hover:bg-yellow-50/30 transition">
+                    <img src="https://www.wasi.lk/wp-content/uploads/2024/01/samsung-galaxy-s24-ultra-titanium-grey.jpg" alt="Samsung S24 Ultra" class="h-40 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
+                </div>
+
+                <div class="mb-2">
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Samsung</div>
+                    <h3 class="font-bold text-slate-800 leading-tight mb-2 line-clamp-2 h-10 group-hover:text-orange-600 transition">Samsung Galaxy S24 Ultra (12GB/256GB)</h3>
+                     <div class="flex items-center gap-2 mb-3">
+                         <span class="bg-green-50 text-green-700 text-[10px] font-bold px-1.5 py-0.5 rounded border border-green-100">In Stock</span>
+                         <span class="text-[10px] text-slate-400 font-medium">TRCSL Approved</span>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-3 border-t border-slate-50">
+                    <div class="flex items-end gap-2 mb-1">
+                        <span class="text-lg font-extrabold text-slate-900">Rs. 345,000</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs mb-4">
+                        <span class="text-slate-400 line-through">Rs. 385,000</span>
+                        <span class="text-red-500 font-bold">Save Rs. 40k</span>
+                    </div>
+                    <a href="https://wasi.lk/shop/samsung-galaxy-s24-ultra-5g-12gb-256gb/" target="_blank" class="block w-full text-center bg-gradient-to-r from-slate-800 to-slate-900 text-white font-bold text-sm py-3 rounded-xl hover:from-orange-600 hover:to-red-600 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300">
+                        View Details
+                    </a>
                 </div>
             </div>
 
-            <div class="border border-gray-200 rounded-xl p-5 hover:shadow-xl transition bg-white relative flex flex-col h-full">
-                <span class="absolute top-4 left-4 bg-[#84cc16] text-white text-[11px] uppercase font-bold px-2 py-0.5 rounded shadow-sm">Best Price</span>
-                <div class="h-40 flex items-center justify-center mb-4 mt-6"><i class="fa-solid fa-headphones text-6xl text-gray-800"></i></div>
-                <h3 class="text-sm text-gray-600 leading-snug mb-2 text-center h-10 overflow-hidden">Sony WH-1000XM5 Premium Headphones</h3>
-                <div class="text-center mt-auto">
-                    <div class="font-extrabold text-xl text-gray-900">$248.00</div>
-                    <div class="text-gray-400 text-xs mb-4">Avg: $323.31</div>
-                    <button class="bg-[#facc15] hover:bg-yellow-400 text-black font-bold text-sm w-full py-2.5 rounded-full transition shadow-sm">View at Amazon</button>
+            <div class="group bg-white rounded-2xl p-4 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-2xl hover:shadow-orange-500/20 hover:border-orange-200 hover:-translate-y-2 transition-all duration-500 relative flex flex-col h-full">
+                <div class="absolute top-3 left-3 flex flex-col gap-1 z-10">
+                    <span class="bg-blue-50 text-blue-600 text-[10px] uppercase font-bold px-2 py-1 rounded border border-blue-100">Price Drop</span>
+                </div>
+                 <div class="absolute top-3 right-3 z-10">
+                    <button class="text-slate-300 hover:text-red-500 transition"><i class="fa-regular fa-heart"></i></button>
+                </div>
+
+                <div class="h-48 flex items-center justify-center mb-4 relative overflow-hidden rounded-xl bg-slate-50 group-hover:bg-gray-100/50 transition">
+                    <img src="https://www.wasi.lk/wp-content/uploads/2022/05/sony-wh-1000xm5-wireless-noise-canceling-headphones-silver.jpg" alt="Sony XM5" class="h-36 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
+                </div>
+
+                <div class="mb-2">
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Sony</div>
+                    <h3 class="font-bold text-slate-800 leading-tight mb-2 line-clamp-2 h-10 group-hover:text-orange-600 transition">Sony WH-1000XM5 Noise Canceling Headphones</h3>
+                     <div class="flex items-center gap-2 mb-3">
+                         <span class="bg-yellow-50 text-yellow-700 text-[10px] font-bold px-1.5 py-0.5 rounded border border-yellow-100">Limited Stock</span>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-3 border-t border-slate-50">
+                    <div class="flex items-end gap-2 mb-1">
+                        <span class="text-lg font-extrabold text-slate-900">Rs. 108,000</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs mb-4">
+                        <span class="text-slate-400 line-through">Rs. 125,000</span>
+                        <span class="text-green-600 font-bold">-14%</span>
+                    </div>
+                    <a href="https://wasi.lk/shop/sony-wh-1000xm5-wireless-noise-canceling-headphones/" target="_blank" class="block w-full text-center bg-gradient-to-r from-slate-800 to-slate-900 text-white font-bold text-sm py-3 rounded-xl hover:from-orange-600 hover:to-red-600 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300">
+                        View Details
+                    </a>
+                </div>
+            </div>
+
+             <div class="group bg-white rounded-2xl p-4 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-2xl hover:shadow-orange-500/20 hover:border-orange-200 hover:-translate-y-2 transition-all duration-500 relative flex flex-col h-full">
+                 <div class="absolute top-3 right-3 z-10">
+                    <button class="text-slate-300 hover:text-red-500 transition"><i class="fa-regular fa-heart"></i></button>
+                </div>
+
+                <div class="h-48 flex items-center justify-center mb-4 relative overflow-hidden rounded-xl bg-slate-50 group-hover:bg-red-50/30 transition">
+                    <img src="https://www.wasi.lk/wp-content/uploads/2021/04/jbl-charge-5-portable-bluetooth-speaker-black.jpg" alt="JBL Charge 5" class="h-40 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
+                </div>
+
+                <div class="mb-2">
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">JBL</div>
+                    <h3 class="font-bold text-slate-800 leading-tight mb-2 line-clamp-2 h-10 group-hover:text-orange-600 transition">JBL Charge 5 Portable Bluetooth Speaker</h3>
+                     <div class="flex items-center gap-2 mb-3">
+                         <span class="bg-green-50 text-green-700 text-[10px] font-bold px-1.5 py-0.5 rounded border border-green-100">In Stock</span>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-3 border-t border-slate-50">
+                    <div class="flex items-end gap-2 mb-1">
+                        <span class="text-lg font-extrabold text-slate-900">Rs. 48,500</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs mb-4">
+                        <span class="text-slate-400 line-through">Rs. 55,000</span>
+                        <span class="text-green-600 font-bold">Fast Moving</span>
+                    </div>
+                    <a href="https://wasi.lk/shop/jbl-charge-5-portable-bluetooth-speaker/" target="_blank" class="block w-full text-center bg-gradient-to-r from-slate-800 to-slate-900 text-white font-bold text-sm py-3 rounded-xl hover:from-orange-600 hover:to-red-600 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300">
+                        View Details
+                    </a>
+                </div>
+            </div>
+
+            <div class="group bg-white rounded-2xl p-4 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-2xl hover:shadow-orange-500/20 hover:border-orange-200 hover:-translate-y-2 transition-all duration-500 relative flex flex-col h-full">
+                <div class="absolute top-3 left-3 flex flex-col gap-1 z-10">
+                    <span class="bg-purple-50 text-purple-600 text-[10px] uppercase font-bold px-2 py-1 rounded border border-purple-100">New</span>
+                </div>
+                 <div class="absolute top-3 right-3 z-10">
+                    <button class="text-slate-300 hover:text-red-500 transition"><i class="fa-regular fa-heart"></i></button>
+                </div>
+
+                <div class="h-48 flex items-center justify-center mb-4 relative overflow-hidden rounded-xl bg-slate-50 group-hover:bg-orange-50/30 transition">
+                    <img src="https://www.wasi.lk/wp-content/uploads/2023/09/apple-watch-ultra-2-gps-cellular-titanium-case-with-alpine-loop.jpg" alt="Apple Watch Ultra 2" class="h-40 object-contain mix-blend-multiply group-hover:scale-110 transition duration-500">
+                </div>
+
+                <div class="mb-2">
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Apple</div>
+                    <h3 class="font-bold text-slate-800 leading-tight mb-2 line-clamp-2 h-10 group-hover:text-orange-600 transition">Apple Watch Ultra 2 (GPS + Cellular)</h3>
+                     <div class="flex items-center gap-2 mb-3">
+                         <span class="bg-green-50 text-green-700 text-[10px] font-bold px-1.5 py-0.5 rounded border border-green-100">In Stock</span>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-3 border-t border-slate-50">
+                    <div class="flex items-end gap-2 mb-1">
+                        <span class="text-lg font-extrabold text-slate-900">Rs. 255,000</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs mb-4">
+                        <span class="text-slate-400 line-through">Rs. 275,000</span>
+                        <span class="text-red-500 font-bold">-7% OFF</span>
+                    </div>
+                    <a href="https://wasi.lk/shop/apple-watch-ultra-2-gps-cellular/" target="_blank" class="block w-full text-center bg-gradient-to-r from-slate-800 to-slate-900 text-white font-bold text-sm py-3 rounded-xl hover:from-orange-600 hover:to-red-600 hover:shadow-lg hover:shadow-orange-500/30 transition-all duration-300">
+                        View Details
+                    </a>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <footer class="bg-gray-900 text-gray-300 pt-16 pb-8 mt-auto">
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+            <div class="flex items-center gap-2 text-white text-2xl font-bold mb-4 cursor-pointer" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-chart-line text-orange-500"></i>
+                <span>PricePulse</span>
+            </div>
+            <p class="text-sm leading-relaxed opacity-80">
+                Track prices, set alerts, and save money on your favorite products from Sri Lanka's top online stores.
+            </p>
+        </div>
+
+        <div>
+            <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Quick Links</h4>
+            <ul class="space-y-3 text-sm font-medium">
+                <li><a href="index.html" class="hover:text-orange-500 transition-colors duration-300">Home</a></li>
+                <li><a href="dashboard.html" class="hover:text-orange-500 transition-colors duration-300">Dashboard</a></li>
+                <li><a href="popular.html" class="hover:text-orange-500 transition-colors duration-300">Popular Products</a></li>
+                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">About Us</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Support & Legal</h4>
+            <ul class="space-y-3 text-sm font-medium">
+                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Help Center</a></li>
+                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Privacy Policy</a></li>
+                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Terms of Service</a></li>
+                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div>
+             <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Stay Connected</h4>
+             <p class="text-sm mb-4 opacity-80">Subscribe to get the latest deal alerts.</p>
+             <div class="flex gap-2 mb-6">
+                <input type="email" placeholder="Enter your email" class="bg-gray-800 text-sm p-3 rounded-l-lg focus:outline-none w-full border border-gray-700 focus:border-orange-500 transition">
+                <button class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 rounded-r-lg hover:opacity-90 transition">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+             </div>
+             <div class="flex gap-4 text-xl">
+                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-facebook"></i></a>
+                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-twitter"></i></a>
+                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-instagram"></i></a>
+                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-linkedin"></i></a>
+             </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 border-t border-gray-800 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center text-sm opacity-60">
+            <p>© 2025 PricePulse. All rights reserved.</p>
+            <p class="mt-2 md:mt-0">Designed & Developed by <span class="text-orange-400">S.D. Tasuntha</span></p>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

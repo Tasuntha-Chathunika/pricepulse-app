@@ -1,93 +1,148 @@
-require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const Product = require('./models/Product');
-const scrapeProduct = require('./utils/scraper');
+const puppeteer = require('puppeteer');
 
 const app = express();
-
-// Middleware (Server settings)
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public')); // Obe HTML files 'public' folder eken gannawa
 
-// Database Connection
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('✅ MongoDB Connected Successfully!'))
-    .catch(err => console.error('❌ MongoDB Connection Error:', err));
+// 1. MongoDB Connection
+mongoose.connect('mongodb://127.0.0.1:27017/pricepulse')
+  .then(() => console.log('✅ MongoDB Connected'))
+  .catch(err => console.error('❌ DB Error:', err));
 
-// --- API ROUTES ---
+// 2. Schema
+const productSchema = new mongoose.Schema({
+  url: String,
+  title: String,
+  image: String,
+  site: String,
+  currentPrice: Number,
+  priceHistory: [{ price: Number, date: { type: Date, default: Date.now } }],
+  lastChecked: { type: Date, default: Date.now }
+});
 
-// 1. Aluth Product ekak track karanna (API Endpoint)
-app.post('/api/track', async (req, res) => {
-    const { url } = req.body;
+const Product = mongoose.model('Product', productSchema);
+
+// Helper: Clean Price
+const parsePrice = txt => parseFloat(txt?.replace(/[^0-9.]/g, '')) || 0;
+
+// 3. PUPPETEER SCRAPER
+async function scrapeProduct(url) {
+  console.log(`🔍 Scraping: ${url}`);
+  
+  const browser = await puppeteer.launch({
+    headless: "new",
+    args: ['--no-sandbox']
+  });
+
+  try {
+    const page = await browser.newPage();
     
-    if (!url) return res.status(400).json({ error: 'URL is required' });
+    // Fake User Agent to bypass blocks
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36');
 
-    try {
-        console.log("🔍 Analyzing URL:", url);
+    // Wait for page to load (60s timeout)
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-        // Kalin save karalada balanawa
-        let existingProduct = await Product.findOne({ url });
-        if (existingProduct) {
-            return res.status(200).json({ message: 'Already tracking this item', product: existingProduct });
-        }
+    // Extract Data from Page
+    const data = await page.evaluate(() => {
+      const text = sel => document.querySelector(sel)?.innerText || null;
+      const meta = p => document.querySelector(`meta[property="${p}"]`)?.content || null;
 
-        // Scrape karanawa (Wasi/Daraz)
-        const data = await scrapeProduct(url);
-        
-        if (!data) {
-            return res.status(500).json({ error: 'Failed to find price. Please check the link.' });
-        }
+      let price = null;
 
-        // Database ekata save karanawa
-        const newProduct = new Product({
-            url,
-            title: data.title,
-            currentPrice: data.price,
-            image: data.image,
-            site: data.site,
-            priceHistory: [{ price: data.price }]
-        });
+      // Wasi.lk Selectors
+      if (location.href.includes('wasi.lk')) {
+        price = text('.price ins bdi') || 
+                text('.price bdi') || 
+                text('.woocommerce-Price-amount bdi');
+      }
 
-        await newProduct.save();
-        console.log("💾 Saved to DB:", data.title);
-        
-        res.status(201).json({ message: 'Tracking Started!', product: newProduct });
+      // SimplyTek Selectors
+      if (location.href.includes('simplytek')) {
+        price = text('#ProductPrice') || 
+                text('.product__price') || 
+                text('.price-item--regular');
+      }
 
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Server Error' });
+      // DirectDeals / General Fallback
+      if (!price) {
+         price = text('.product-price') || text('.price .amount');
+      }
+
+      return {
+        title: meta('og:title') || document.title,
+        image: meta('og:image'),
+        price
+      };
+    });
+
+    const finalPrice = parsePrice(data.price);
+    if (!finalPrice || finalPrice === 0) throw new Error('Price not found');
+
+    // Determine Site Name for Badge
+    let siteName = 'Store';
+    if (url.includes('wasi')) siteName = 'Wasi.lk';
+    else if (url.includes('simplytek')) siteName = 'SimplyTek';
+    else if (url.includes('directdeal')) siteName = 'DirectDeals';
+    else if (url.includes('dialcom')) siteName = 'Dialcom';
+
+    return {
+      title: data.title,
+      image: data.image || 'https://via.placeholder.com/300',
+      price: finalPrice,
+      site: siteName
+    };
+
+  } catch (error) {
+    throw error;
+  } finally {
+    await browser.close(); // Close browser to save RAM
+  }
+}
+
+// 4. ROUTES
+app.post('/api/products', async (req, res) => {
+  try {
+    const { url } = req.body;
+
+    // Check Duplicates
+    const exists = await Product.findOne({ url });
+    if (exists) {
+      console.log(`ℹ️ Exists: ${exists.title}`);
+      return res.json({ status: 'exists', product: exists });
     }
+
+    // Scrape & Save
+    const scraped = await scrapeProduct(url);
+
+    const product = await Product.create({
+      url,
+      ...scraped,
+      currentPrice: scraped.price,
+      priceHistory: [{ price: scraped.price }]
+    });
+
+    console.log(`✅ Saved: ${scraped.title}`);
+    res.status(201).json({ status: 'new', product });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: e.message });
+  }
 });
 
-// 2. Track karana badu list eka ganna
-app.get('/api/products', async (req, res) => {
-    try {
-        const products = await Product.find().sort({ lastChecked: -1 });
-        res.json(products);
-    } catch (error) {
-        res.status(500).json({ error: 'Server Error' });
-    }
+app.get('/api/products', async (_, res) => {
+  const products = await Product.find().sort({ lastChecked: -1 });
+  res.json(products);
 });
 
-// ... kalin routes uda thiyenawa ...
-
-// 3. Delete Product (Remove item)
 app.delete('/api/products/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        await Product.findByIdAndDelete(id);
-        res.json({ message: 'Product deleted successfully' });
-    } catch (error) {
-        console.error("Delete Error:", error);
-        res.status(500).json({ error: 'Server Error' });
-    }
+  await Product.findByIdAndDelete(req.params.id);
+  res.json({ success: true });
 });
 
-// ... Server Start code eka pahalin thiyenawa ...
-
-// Server Start
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+app.listen(5000, () =>
+  console.log('🚀 Server running on http://localhost:5000')
+);
