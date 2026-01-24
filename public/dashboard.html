@@ -545,14 +545,12 @@
     <footer class="bg-gray-900 text-gray-300 pt-16 pb-8 mt-auto">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-                <div class="flex items-center gap-2 text-white text-2xl font-bold mb-4 cursor-pointer"
-                    onclick="window.location.href='index.html'">
+                <div class="flex items-center gap-2 text-white text-2xl font-bold mb-4 cursor-pointer" onclick="window.location.href='index.html'">
                     <i class="fa-solid fa-chart-line text-orange-500"></i>
                     <span>PricePulse</span>
                 </div>
                 <p class="text-sm leading-relaxed opacity-80">
-                    Track prices, set alerts, and save money on your favorite products from Sri Lanka's top online
-                    stores.
+                    Track prices, set alerts, and save money on your favorite products from Sri Lanka's top online stores.
                 </p>
             </div>
 
@@ -560,10 +558,8 @@
                 <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Quick Links</h4>
                 <ul class="space-y-3 text-sm font-medium">
                     <li><a href="index.html" class="hover:text-orange-500 transition-colors duration-300">Home</a></li>
-                    <li><a href="dashboard.html"
-                            class="hover:text-orange-500 transition-colors duration-300">Dashboard</a></li>
-                    <li><a href="popular.html" class="hover:text-orange-500 transition-colors duration-300">Popular
-                            Products</a></li>
+                    <li><a href="dashboard.html" class="hover:text-orange-500 transition-colors duration-300">Dashboard</a></li>
+                    <li><a href="popular.html" class="hover:text-orange-500 transition-colors duration-300">Popular Products</a></li>
                     <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">About Us</a></li>
                 </ul>
             </div>
@@ -573,33 +569,27 @@
                 <ul class="space-y-3 text-sm font-medium">
                     <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Help Center</a></li>
                     <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Privacy Policy</a></li>
-                    <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Terms of Service</a>
-                    </li>
+                    <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Terms of Service</a></li>
                     <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Contact Us</a></li>
                 </ul>
             </div>
 
             <div>
-                <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Stay Connected</h4>
-                <p class="text-sm mb-4 opacity-80">Subscribe to get the latest deal alerts.</p>
-                <div class="flex gap-2 mb-6">
-                    <input type="email" placeholder="Enter your email"
-                        class="bg-gray-800 text-sm p-3 rounded-l-lg focus:outline-none w-full border border-gray-700 focus:border-orange-500 transition">
-                    <button
-                        class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 rounded-r-lg hover:opacity-90 transition">
+                 <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Stay Connected</h4>
+                 <p class="text-sm mb-4 opacity-80">Subscribe to get the latest deal alerts.</p>
+                 
+                 <div class="flex gap-2 mb-6">
+                    <input type="email" id="newsletterEmail" placeholder="Enter your email" class="bg-gray-800 text-sm p-3 rounded-l-lg focus:outline-none w-full border border-gray-700 focus:border-orange-500 transition">
+                    <button onclick="handleSubscribe()" class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 rounded-r-lg hover:opacity-90 transition transform active:scale-95">
                         <i class="fa-solid fa-paper-plane"></i>
                     </button>
-                </div>
-                <div class="flex gap-4 text-xl">
-                    <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i
-                            class="fa-brands fa-facebook"></i></a>
-                    <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i
-                            class="fa-brands fa-twitter"></i></a>
-                    <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i
-                            class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i
-                            class="fa-brands fa-linkedin"></i></a>
-                </div>
+                 </div>
+
+                 <div class="flex gap-4 text-xl">
+                     <a href="https://www.facebook.com/share/1GPB6K4eL3/" target="_blank" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-facebook"></i></a>
+                     <a href="https://www.instagram.com/tasuntha_chathunika?igsh=bjVqMDc5dDJ2MHBj" target="_blank" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-instagram"></i></a>
+                     <a href="https://www.linkedin.com/in/tasuntha-chathunika" target="_blank" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-linkedin"></i></a>
+                 </div>
             </div>
         </div>
 
@@ -610,6 +600,24 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        function handleSubscribe() {
+            const emailInput = document.getElementById('newsletterEmail');
+            const email = emailInput.value;
+
+            if (email && email.includes('@')) {
+                // Show Success Message (Simple Alert for Demo)
+                alert("✅ Thanks for subscribing! You'll receive updates at " + email);
+                emailInput.value = ""; // Clear the input
+            } else {
+                // Show Error
+                alert("⚠️ Please enter a valid email address.");
+            }
+        }
+    </script>
+
+    
 </body>
 
 </html>

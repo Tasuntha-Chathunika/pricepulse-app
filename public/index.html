@@ -90,9 +90,9 @@
                         <a href="signup.html" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 hover:from-yellow-500 hover:via-orange-600 hover:to-red-700 text-white font-bold rounded-xl shadow-xl shadow-orange-200 hover:shadow-2xl hover:-translate-y-1 transition transform flex items-center justify-center gap-2">
                             Start Tracking Free <i class="fa-solid fa-arrow-right"></i>
                         </a>
-                        <a href="dashboard.html" class="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 font-bold rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-laptop"></i> Live Demo
-                        </a>
+                        <a href="demo-dashboard.html" class="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 font-bold rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition flex items-center justify-center gap-2">
+    <i class="fa-solid fa-laptop"></i> Live Demo
+</a>
                     </div>
                     
                     <div class="mt-8 flex items-center justify-center lg:justify-start gap-6 text-sm text-slate-400 font-medium">
@@ -197,62 +197,79 @@
         </div>
     </div>
 
-   <footer class="bg-gray-900 text-gray-300 pt-16 pb-8 mt-auto">
-    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-        <div>
-            <div class="flex items-center gap-2 text-white text-2xl font-bold mb-4 cursor-pointer" onclick="window.location.href='index.html'">
-                <i class="fa-solid fa-chart-line text-orange-500"></i>
-                <span>PricePulse</span>
+<footer class="bg-gray-900 text-gray-300 pt-16 pb-8 mt-auto">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+                <div class="flex items-center gap-2 text-white text-2xl font-bold mb-4 cursor-pointer" onclick="window.location.href='index.html'">
+                    <i class="fa-solid fa-chart-line text-orange-500"></i>
+                    <span>PricePulse</span>
+                </div>
+                <p class="text-sm leading-relaxed opacity-80">
+                    Track prices, set alerts, and save money on your favorite products from Sri Lanka's top online stores.
+                </p>
             </div>
-            <p class="text-sm leading-relaxed opacity-80">
-                Track prices, set alerts, and save money on your favorite products from Sri Lanka's top online stores.
-            </p>
+
+            <div>
+                <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Quick Links</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="index.html" class="hover:text-orange-500 transition-colors duration-300">Home</a></li>
+                    <li><a href="dashboard.html" class="hover:text-orange-500 transition-colors duration-300">Dashboard</a></li>
+                    <li><a href="popular.html" class="hover:text-orange-500 transition-colors duration-300">Popular Products</a></li>
+                    <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">About Us</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Support & Legal</h4>
+                <ul class="space-y-3 text-sm font-medium">
+                    <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Help Center</a></li>
+                    <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div>
+                 <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Stay Connected</h4>
+                 <p class="text-sm mb-4 opacity-80">Subscribe to get the latest deal alerts.</p>
+                 
+                 <div class="flex gap-2 mb-6">
+                    <input type="email" id="newsletterEmail" placeholder="Enter your email" class="bg-gray-800 text-sm p-3 rounded-l-lg focus:outline-none w-full border border-gray-700 focus:border-orange-500 transition">
+                    <button onclick="handleSubscribe()" class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 rounded-r-lg hover:opacity-90 transition transform active:scale-95">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                 </div>
+
+                 <div class="flex gap-4 text-xl">
+                     <a href="https://www.facebook.com/share/1GPB6K4eL3/" target="_blank" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-facebook"></i></a>
+                     <a href="https://www.instagram.com/tasuntha_chathunika?igsh=bjVqMDc5dDJ2MHBj" target="_blank" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-instagram"></i></a>
+                     <a href="https://www.linkedin.com/in/tasuntha-chathunika" target="_blank" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-linkedin"></i></a>
+                 </div>
+            </div>
         </div>
 
-        <div>
-            <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Quick Links</h4>
-            <ul class="space-y-3 text-sm font-medium">
-                <li><a href="index.html" class="hover:text-orange-500 transition-colors duration-300">Home</a></li>
-                <li><a href="dashboard.html" class="hover:text-orange-500 transition-colors duration-300">Dashboard</a></li>
-                <li><a href="popular.html" class="hover:text-orange-500 transition-colors duration-300">Popular Products</a></li>
-                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">About Us</a></li>
-            </ul>
+        <div class="container mx-auto px-4 border-t border-gray-800 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm opacity-60">
+                <p>© 2025 PricePulse. All rights reserved.</p>
+                <p class="mt-2 md:mt-0">Designed & Developed by <span class="text-orange-400">S.D. Tasuntha</span></p>
+            </div>
         </div>
+    </footer>
 
-        <div>
-            <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Support & Legal</h4>
-            <ul class="space-y-3 text-sm font-medium">
-                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Help Center</a></li>
-                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Privacy Policy</a></li>
-                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Terms of Service</a></li>
-                <li><a href="#" class="hover:text-orange-500 transition-colors duration-300">Contact Us</a></li>
-            </ul>
-        </div>
+    <script>
+        function handleSubscribe() {
+            const emailInput = document.getElementById('newsletterEmail');
+            const email = emailInput.value;
 
-        <div>
-             <h4 class="text-white font-bold mb-6 uppercase tracking-wider">Stay Connected</h4>
-             <p class="text-sm mb-4 opacity-80">Subscribe to get the latest deal alerts.</p>
-             <div class="flex gap-2 mb-6">
-                <input type="email" placeholder="Enter your email" class="bg-gray-800 text-sm p-3 rounded-l-lg focus:outline-none w-full border border-gray-700 focus:border-orange-500 transition">
-                <button class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 rounded-r-lg hover:opacity-90 transition">
-                    <i class="fa-solid fa-paper-plane"></i>
-                </button>
-             </div>
-             <div class="flex gap-4 text-xl">
-                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-facebook"></i></a>
-                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-twitter"></i></a>
-                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-instagram"></i></a>
-                 <a href="#" class="hover:text-orange-500 transition-transform hover:-translate-y-1"><i class="fa-brands fa-linkedin"></i></a>
-             </div>
-        </div>
-    </div>
-
-    <div class="container mx-auto px-4 border-t border-gray-800 pt-8">
-        <div class="flex flex-col md:flex-row justify-between items-center text-sm opacity-60">
-            <p>© 2025 PricePulse. All rights reserved.</p>
-            <p class="mt-2 md:mt-0">Designed & Developed by <span class="text-orange-400">S.D. Tasuntha</span></p>
-        </div>
-    </div>
-</footer>
+            if (email && email.includes('@')) {
+                // Show Success Message (Simple Alert for Demo)
+                alert("✅ Thanks for subscribing! You'll receive updates at " + email);
+                emailInput.value = ""; // Clear the input
+            } else {
+                // Show Error
+                alert("⚠️ Please enter a valid email address.");
+            }
+        }
+    </script>
 </body>
 </html>
